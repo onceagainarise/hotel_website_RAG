@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Hotel Logo" class="logo">
+        <nav class="nav-bar">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#dining" class="nav-link">Dining</a>
+            <a href="#membership" class="nav-link">Membership</a>
+            <a href="#book" class="nav-link">Book a Stay</a>
+            <a href="#login" class="nav-link">Login/Signup</a>
+        </nav>
+    </div>
+
+    <!-- Page Sections -->
+    <div id="home" class="page-section">
+        <div class="welcome-message">
+            <h1><span class="typing">Welcome to Our Heavenly Hotel!</span></h1>
+            <p>Discover a paradise on Earth, where luxury meets serenity.</p>
+        </div>
+    </div>
+
+    <div id="dining" class="page-section">
+        <h1>Dining</h1>
+        <p>Indulge in gourmet delicacies crafted by our world-class chefs.</p>
+    </div>
+
+    <div id="membership" class="page-section">
+        <h1>Membership</h1>
+        <p>Join our exclusive club for unparalleled benefits and privileges.</p>
+    </div>
+
+    <div id="book" class="page-section">
+        <h1>Book a Stay</h1>
+        <p>Reserve your room today and embark on a luxurious journey.</p>
+    </div>
+
+    <!-- Place this where you want the Login/Signup button to appear (probably inside your navbar or at the bottom of the page) -->
+<a href="#" class="nav-link" id="login-btn">Login/Signup</a>
+
+<!-- Modal (Place this inside the body, after other content) -->
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Login/Signup</h2>
+        <form id="login-form">
+            <div id="login-fields">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </div>
+
+            <div id="signup-fields" style="display: none;">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email-signup">Email:</label>
+                <input type="email" id="email-signup" name="email-signup" required>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required></textarea>
+                <button type="submit">Signup</button>
+            </div>
+        </form>
+        <p id="toggle-signup">Don't have an account? <a href="#">Signup</a></p>
+        <p id="toggle-login" style="display: none;">Already have an account? <a href="#">Login</a></p>
+    </div>
+</div>
+<script src="css/modal.js">
+    // Get modal, buttons, and toggles
+const loginModal = document.getElementById("login-modal");
+const loginBtn = document.getElementById("login-btn");
+const closeModal = document.querySelector(".close-btn");
+const toggleSignup = document.getElementById("toggle-signup");
+const toggleLogin = document.getElementById("toggle-login");
+const loginFields = document.getElementById("login-fields");
+const signupFields = document.getElementById("signup-fields");
+
+// Show modal when "Login/Signup" is clicked
+loginBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    loginModal.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+});
+
+// Close modal when "X" is clicked
+closeModal.addEventListener("click", () => {
+    loginModal.style.display = "none";
+    document.body.style.overflow = "auto"; // Restore background scroll
+});
+
+// Toggle to Signup form
+toggleSignup.querySelector("a").addEventListener("click", (e) => {
+    e.preventDefault();
+    loginFields.style.display = "none";
+    signupFields.style.display = "block";
+    toggleSignup.style.display = "none";
+    toggleLogin.style.display = "block";
+});
+
+// Toggle to Login form
+toggleLogin.querySelector("a").addEventListener("click", (e) => {
+    e.preventDefault();
+    loginFields.style.display = "block";
+    signupFields.style.display = "none";
+    toggleSignup.style.display = "block";
+    toggleLogin.style.display = "none";
+});
+
+// Close modal when clicking outside modal content
+window.addEventListener("click", (e) => {
+    if (e.target === loginModal) {
+        loginModal.style.display = "none";
+        document.body.style.overflow = "auto"; // Restore background scroll
+    }
+});
+</script>
+</body>
+</html>
